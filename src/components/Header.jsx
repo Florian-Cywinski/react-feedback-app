@@ -32,7 +32,7 @@ Header.propTypes = {
     text: PropTypes.string,     // To have type checking - Gives a warning in the console when it isn't a string
     // text: PropTypes.string.isRequired        // Gives a warning in the console when it isn't a string (fatal) 
     bgColor: PropTypes.string,
-    textColor: PropTypes.string,
+    // textColor: PropTypes.string,
 }
 
 export default Header
