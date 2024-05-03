@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+    return (
+      <>    {/* This is used to be able to bring in both <Header /> and <div> */}
+        {/* <Header text='Hello World' />  To bring in the imported component - text='Hello World' is a prop (property) which can be past in to a component (see Header.jsx -> here the prop is catched) */}
+        {/* <Header bgColor='red' textColor='blue' /> */}
+        <Header />
+        <div className='container'>
+          <h1>My App</h1>
+        </div>
+      </>
+    )
+  }
+  
+  export default App
