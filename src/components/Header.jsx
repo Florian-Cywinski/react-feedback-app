@@ -2,7 +2,8 @@ import PropTypes from 'prop-types'      // to bring in prop types (checks whethe
 
 {/* function Header(props) {     props is an object with one or more properties (see App.js) */}
 {/* function Header({ text }) {         the sam as above just refactored the object */}
-function Header({ text, bgColor, textColor }) {
+// function Header({ text, bgColor, textColor }) {
+function Header({ text = 'Feedback UI', bgColor = 'rgba(0,0,0,0.4)', textColor = '#ff6a95' }) {
 
   const headerStyles = { 
     // backgroundColor: 'blue', color: 'red' 
@@ -12,7 +13,7 @@ function Header({ text, bgColor, textColor }) {
   return (
     // <header style={{ backgroundColor: 'blue', color: 'red' }}>
     <header style={headerStyles}>
-        <div className="cotainer">
+        <div className="container">
             {/* <h2>{props.text}</h2> */}
             <h2>{text}</h2>
         </div>
@@ -21,11 +22,12 @@ function Header({ text, bgColor, textColor }) {
 }
 
  {/* For the case nothing was past in to the specific prop */}
-Header.defaultProps = {        
-    text: 'Feedback UI',
-    bgColor: 'rgba(0,0,0,0.4)',
-    textColor: '#ff6a95',
-}
+ // Warning: Header: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead.
+// Header.defaultProps = {        
+//     text: 'Feedback UI',
+//     bgColor: 'rgba(0,0,0,0.4)',
+//     textColor: '#ff6a95',
+// }
 
 {/* To be able to add propTypes */}
 Header.propTypes = {
