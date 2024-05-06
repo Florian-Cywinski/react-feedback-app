@@ -3,7 +3,7 @@ import Card from './shared/Card'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
 
-function FeedbackForm() {
+function FeedbackForm({ handleAdd }) {
   const [text, setText] = useState('')
   const [rating, setRating] = useState(10)
   const [btnDisabled, setBtnDisabled] = useState(true)
@@ -26,9 +26,22 @@ function FeedbackForm() {
     }
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (text.trim().length > 10) {
+      const newFeedback = {
+        text,       // text: text
+        rating      // rating: rating
+      }
+    handleAdd(newFeedback)  // To output the new feedback to App.js
+
+    setText('')   // To clear the input field after submit
+    }
+  }
+
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us?</h2>
         <RatingSelect select={(rating) => setRating(rating)} /> {/* select is a prop which is a function (it gets the selected value (rating) (1...10) from RatingSelect.jsx (select) and save it into setRating) */}
         <div className='input-group'>

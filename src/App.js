@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'   // To use this package just call uuidv4 as function to create unique ids
 import { useState } from "react"
 import Header from "./components/Header"
 import FeedbackList from "./components/FeedbackList"
@@ -7,6 +8,11 @@ import FeedbackData from "./data/FeedbackData"
 
 function App() {
     const [feedback, setFeedback] = useState(FeedbackData)
+
+    const addFeedback = (newFeedback) => {
+      newFeedback.id = uuidv4()
+      setFeedback([newFeedback, ...feedback]) // To setFeedback to an array of the newFeedback and all the already existing feedbacks (... is the spread operator)
+    }
 
     const deleteFeedback = (id) => {  // A function to delete one Feedback
       if (window.confirm('Are you sure you want to delete?')) {
@@ -20,7 +26,7 @@ function App() {
         {/* <Header bgColor='red' textColor='blue' /> */}
         <Header />
         <div className='container'>
-          <FeedbackForm />
+          <FeedbackForm handleAdd={addFeedback}/>
           <FeedbackStats feedback={feedback}/>
           <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
         </div>
