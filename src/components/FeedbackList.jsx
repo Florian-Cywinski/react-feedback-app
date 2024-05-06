@@ -3,7 +3,7 @@ import { useContext } from "react"
 import FeedbackItem from "./FeedbackItem"
 import FeedbackContext from "../context/FeedbackContext"
 
-function FeedbackList({ handleDelete }) {
+function FeedbackList() {
   const {feedback} = useContext(FeedbackContext)  // To bring in all feedbacks
 
   if (!feedback || feedback.length === 0) {
@@ -15,7 +15,7 @@ function FeedbackList({ handleDelete }) {
       <AnimatePresence  mode="popLayout">
         {feedback.map((item) => (
           <motion.div layout key={item.id} initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
-            <FeedbackItem key={item.id} item={item} handleDelete={handleDelete} />
+            <FeedbackItem key={item.id} item={item} />
           </motion.div>
         ))}
       </AnimatePresence>

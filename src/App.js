@@ -1,28 +1,13 @@
-import { v4 as uuidv4 } from 'uuid'   // To use this package just call uuidv4 as function to create unique ids
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { useState } from "react"
 import Header from "./components/Header"
 import FeedbackList from "./components/FeedbackList"
 import FeedbackStats from "./components/FeedbackStats"
 import FeedbackForm from "./components/FeedbackForm"
-import FeedbackData from "./data/FeedbackData"
 import AboutPage from './pages/AboutPage'
 import AboutIconLink from './components/AboutIconLink'
 import { FeedbackProvider } from './context/FeedbackContext'  // {} because it's not a default export
 
 function App() {
-    const [feedback, setFeedback] = useState(FeedbackData)
-
-    const addFeedback = (newFeedback) => {
-      newFeedback.id = uuidv4()
-      setFeedback([newFeedback, ...feedback]) // To setFeedback to an array of the newFeedback and all the already existing feedbacks (... is the spread operator)
-    }
-
-    const deleteFeedback = (id) => {  // A function to delete one Feedback
-      if (window.confirm('Are you sure you want to delete?')) {
-        setFeedback(feedback.filter((item) => item.id !== id))
-      }
-    }
 
     return (
       <FeedbackProvider>
@@ -35,9 +20,9 @@ function App() {
               {/* To show the homepage - without exact it would have a conflict with /about */}
               <Route exact path='/' element={    
                 <>
-                  <FeedbackForm handleAdd={addFeedback}/>
+                  <FeedbackForm />
                   <FeedbackStats />
-                  <FeedbackList handleDelete={deleteFeedback}/>
+                  <FeedbackList />
                   <AboutIconLink />
                 </>
               }>

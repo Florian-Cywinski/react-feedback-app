@@ -1,13 +1,16 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import Card from './shared/Card'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
+import FeedbackContext from '../context/FeedbackContext'
 
-function FeedbackForm({ handleAdd }) {
+function FeedbackForm() {
   const [text, setText] = useState('')
   const [rating, setRating] = useState(10)
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [message, setMessage] = useState('')  // To have a min. of 10 char in the input field filled in
+
+  const {addFeedback} = useContext(FeedbackContext)   // To bring in the addFeedback function from FeedbackContext
 
   const handleTextChange = (e) => { 
     let inputValue = e.target.value
@@ -33,7 +36,7 @@ function FeedbackForm({ handleAdd }) {
         text,       // text: text
         rating      // rating: rating
       }
-    handleAdd(newFeedback)  // To output the new feedback to App.js
+    addFeedback(newFeedback)  // To output the new feedback to App.js
 
     setText('')   // To clear the input field after submit
     }
