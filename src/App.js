@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'   // To use this package just call uuidv4 as function to create unique ids
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useState } from "react"
 import Header from "./components/Header"
 import FeedbackList from "./components/FeedbackList"
@@ -28,13 +28,19 @@ function App() {
         {/* <Header bgColor='red' textColor='blue' /> */}
         <Header />
         <div className='container'>
-          <Route exact path='/'>    {/* To show the homepage - without exact it would have a conflict with /about */}
-            <FeedbackForm handleAdd={addFeedback}/>
-            <FeedbackStats feedback={feedback}/>
-            <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
-          </Route>
+          <Routes>
+            {/* To show the homepage - without exact it would have a conflict with /about */}
+            <Route exact path='/' element={    
+              <>
+                <FeedbackForm handleAdd={addFeedback}/>
+                <FeedbackStats feedback={feedback}/>
+                <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
+              </>
+            }>
+            </Route>
 
-          <Route path='/about' component={AboutPage} />
+            <Route path='/about' element={<AboutPage/>} />
+          </Routes>
         </div>
       </Router>
     )
