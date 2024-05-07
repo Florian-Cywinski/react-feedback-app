@@ -1,3 +1,9 @@
+# Feedback App Project
+
+A React Feedback App Project - from Brad Traversy's 'React Front To Back' course.
+
+Try out the app :) - https://react-feedback-app-fc.netlify.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
