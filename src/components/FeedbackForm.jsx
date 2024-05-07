@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Card from './shared/Card'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
@@ -10,7 +10,19 @@ function FeedbackForm() {
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [message, setMessage] = useState('')  // To have a min. of 10 char in the input field filled in
 
-  const {addFeedback} = useContext(FeedbackContext)   // To bring in the addFeedback function from FeedbackContext
+  const { addFeedback, feedbackEdit } = useContext(FeedbackContext)   // To bring in the addFeedback function from FeedbackContext
+
+  // useEffect(() => {
+  //   console.log('The component has loaded');
+  // }, [])  // The second argument (an array of dependencies) - if there is something in the array and it changes the arrow function is gonna run - if it's empty it just runs when the component loads
+
+  useEffect(() => {
+    if (feedbackEdit.edit === true) {   // To check whether it's in edit mode
+      setBtnDisabled(false)     // Enables the Send button
+      setText(feedbackEdit.item.text)   // Shows the text in the input filed
+      setRating(feedbackEdit.item.rating)   // To get the current rating of the selected item (feedback)
+    }
+  }, [feedbackEdit])  // The arrow function runs when the edit icon was clicked
 
   const handleTextChange = (e) => { 
     let inputValue = e.target.value
@@ -46,7 +58,8 @@ function FeedbackForm() {
     <Card>
       <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us?</h2>
-        <RatingSelect select={(rating) => setRating(rating)} /> {/* select is a prop which is a function (it gets the selected value (rating) (1...10) from RatingSelect.jsx (select) and save it into setRating) */}
+        <RatingSelect select={setRating} selected={rating} />
+        {/* <RatingSelect select={(rating) => setRating(rating)} /> select is a prop which is a function (it gets the selected value (rating) (1...10) from RatingSelect.jsx (select) and save it into setRating) */}
         <div className='input-group'>
           <input onChange={handleTextChange} type='text' placeholder='Write a review' value={text}/>
           <Button type='submit' isDisabled={btnDisabled}>Send</Button>

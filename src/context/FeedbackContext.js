@@ -49,10 +49,11 @@ export const FeedbackProvider = ({ children }) => {
   }
 
   return <FeedbackContext.Provider value={{
-    feedback,                   // feedback: feedback
-    deleteFeedback,             // deleteFeedback: deleteFeedback
-    addFeedback,                // addFeedback: addFeedback
-    editFeedback                // editFeedback: editFeedback
+    feedback,                   // feedback: feedback   state (data)
+    deleteFeedback,             // deleteFeedback: deleteFeedback   function
+    addFeedback,                // addFeedback: addFeedback         function
+    editFeedback,               // editFeedback: editFeedback       function
+    feedbackEdit                // ...   state (data)
   }}>{children}</FeedbackContext.Provider>
 }
 

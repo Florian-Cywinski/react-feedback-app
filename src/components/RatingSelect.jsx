@@ -1,15 +1,18 @@
-import { useState } from "react"
+// import { useState, useContext } from "react"
+// import FeedbackContext from "../context/FeedbackContext"
 
-function RatingSelect({ select }) { // select is a prop which is a function (FeedbackForm.jsx)
-  const [selected, setSelected] = useState(10)  // see down below checked={selected === i + 1}
+function RatingSelect({ select, selected }) { // select is a prop which is a function (FeedbackForm.jsx)
+  // const [selected, setSelected] = useState(10)  // see down below checked={selected === i + 1}
   // NOTE: We don't need local state here as it's a duplicate of parent state
   // also no real need for useEffect or context
   // useEffect(() => {
   //   select(feedbackEdit.item.rating)
   // }, [feedbackEdit])
 
+  // const { feedbackEdit } = useContext(FeedbackContext)   // To bring in the addFeedback function from FeedbackContext
+
   const handleChange = (e) => {
-    setSelected(+e.currentTarget.value) // to set (1...10) 
+    // setSelected(+e.currentTarget.value) // to set (1...10) 
     select(+e.currentTarget.value)  // to call the function select
   }
 
