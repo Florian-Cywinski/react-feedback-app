@@ -2,15 +2,16 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useContext } from "react"
 import FeedbackItem from "./FeedbackItem"
 import FeedbackContext from "../context/FeedbackContext"
+import Spinner from './shared/Spinner'
 
 function FeedbackList() {
-  const {feedback} = useContext(FeedbackContext)  // To bring in all feedbacks
+  const { feedback, isLoading } = useContext(FeedbackContext)  // To bring in all feedbacks and the boolean value of isLoading
 
-  if (!feedback || feedback.length === 0) {
+  if (!isLoading && (!feedback || feedback.length === 0)) {   // if it's not loading anymore AND there is no feedback data OR if there are no feedbacks in the data
     return <p>No Feedback Yet</p>
   }
 
-  return (
+  return isLoading ? (<Spinner />) : (
     <div className='feedback-list'>
       <AnimatePresence  mode="popLayout">
         {feedback.map((item) => (
