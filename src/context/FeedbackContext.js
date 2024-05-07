@@ -17,8 +17,8 @@ export const FeedbackProvider = ({ children }) => {
 
   // Fetch feedback
   const fetchFeedback = async () => {
-    // const response = await fetch(`/feedback?_sort=id`)
-    const response = await fetch(`http://localhost:5000/feedback?_sort=-id`)    // - is to reverse the order
+    // const response = await fetch(`http://localhost:5000/feedback?_sort=-id`)    // - is to reverse the order
+    const response = await fetch(`/feedback?_sort=-id`)
     const data = await response.json()
 
     setFeedback(data)
@@ -26,9 +26,18 @@ export const FeedbackProvider = ({ children }) => {
   }
 
   // Add feedback
-  const addFeedback = (newFeedback) => {
-    newFeedback.id = uuidv4()
-    setFeedback([newFeedback, ...feedback]) // To setFeedback to an array of the newFeedback and all the already existing feedbacks (... is the spread operator)
+  const addFeedback = async (newFeedback) => {
+    const response = await fetch('/feedback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newFeedback),
+    })
+
+    const data = await response.json()
+
+    setFeedback([data, ...feedback])  // To set the new data with all already existing feedbacks in one array (... is the spread operator)
   }
 
   // Delete feedback
