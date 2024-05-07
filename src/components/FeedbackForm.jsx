@@ -10,7 +10,7 @@ function FeedbackForm() {
   const [btnDisabled, setBtnDisabled] = useState(true)
   const [message, setMessage] = useState('')  // To have a min. of 10 char in the input field filled in
 
-  const { addFeedback, feedbackEdit } = useContext(FeedbackContext)   // To bring in the addFeedback function from FeedbackContext
+  const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext)   // To bring in the addFeedback function from FeedbackContext
 
   // useEffect(() => {
   //   console.log('The component has loaded');
@@ -48,12 +48,18 @@ function FeedbackForm() {
         text,       // text: text
         rating      // rating: rating
       }
-    addFeedback(newFeedback)  // To output the new feedback to App.js
+
+    if (feedbackEdit.edit === true) { // If a feedback item is in edit mode
+      updateFeedback(feedbackEdit.item.id, newFeedback)
+    } else {
+      addFeedback(newFeedback)  // To output the new feedback to App.js
+    }
 
     setText('')   // To clear the input field after submit
     }
   }
 
+  // NOTE: pass selected to RatingSelect so we don't need local duplicate state
   return (
     <Card>
       <form onSubmit={handleSubmit}>
